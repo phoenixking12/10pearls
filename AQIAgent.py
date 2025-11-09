@@ -12,7 +12,7 @@ import shap
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 
-API_KEY = "vkQUwBffplAUhyYL.giHjnNqIRRF88JUfLtwjyskbXVuqhO3mHiocVBP5I9OOrEOxVSjLIDQBUw1qpo1Q"
+API_KEY = ""
 PROJECT_NAME = "AirAi"
 
 OPENAQ_HEADERS = {
