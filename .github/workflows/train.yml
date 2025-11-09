@@ -7,8 +7,12 @@ on:
     - cron: "0 0 * * *"   # run daily at midnight UTC
 
 jobs:
-  train:
+  feature:
+    name: Run Feature Pipeline
     runs-on: ubuntu-latest
+
+    env:
+      HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
 
     steps:
       - name: Checkout repo
@@ -25,9 +29,29 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run feature pipeline
+        run: python AQIAgent.py feature
+
+  train:
+    name: Run Training Pipeline
+    runs-on: ubuntu-latest
+    needs: feature
+
+    env:
+      HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
+      OPEN_AQ_KEY: ${{ secrets.OPEN_AQ_KEY }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
         run: |
-          python AQIAgent.py feature
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run training pipeline
-        run: |
-          python AQIAgent.py train
+        run: python AQIAgent.py train
