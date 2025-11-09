@@ -16,7 +16,7 @@ API_KEY = os.environ["HOPSWORKS_API_KEY"]
 PROJECT_NAME = "AirAi"
 
 OPENAQ_HEADERS = {
-    "X-API-Key": "os.environ["OPENAQ_KEY"]"
+    "X-API-Key": os.environ["OPEN_AQ_KEY"]
 }
 
 LAT, LON = 24.8607, 67.0011
