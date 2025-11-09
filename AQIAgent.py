@@ -12,11 +12,11 @@ import shap
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 
-API_KEY = ""
+API_KEY = os.environ["HOPSWORKS_API_KEY"]
 PROJECT_NAME = "AirAi"
 
 OPENAQ_HEADERS = {
-    "X-API-Key": "e323e4f35041ef19951799d962bdb5ccc6e878baead60ede3e7e56574ed1ae0f"
+    "X-API-Key": "os.environ["OPENAQ_KEY"]"
 }
 
 LAT, LON = 24.8607, 67.0011
