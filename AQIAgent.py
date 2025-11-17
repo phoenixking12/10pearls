@@ -140,36 +140,6 @@ def get_weather_data(start_date, end_date, hourly=True):
     df["country"] = COUNTRY
     return df
 
-def get_weather_forecast(start_day, end_day):
-    base_url = "https://api.open-meteo.com/v1/forecast"
-    params = {
-        "latitude": LAT,
-        "longitude": LON,
-        "hourly": [
-            "temperature_2m", "relative_humidity_2m", "pressure_msl",
-            "wind_speed_10m", "weathercode"
-        ],
-        "timezone": "auto",
-        "start_date": start_day,
-        "end_date": end_day,
-    }
-    r = requests.get(base_url, params=params)
-    r.raise_for_status()
-    data = r.json()
-
-    df = pd.DataFrame(data["hourly"])
-    df.rename(columns={
-        "temperature_2m": "temperature",
-        "relative_humidity_2m": "humidity",
-        "pressure_msl": "pressure",
-        "wind_speed_10m": "wind_speed",
-        "time": "timestamp",
-    }, inplace=True)
-    df["timestamp"] = pd.to_datetime(df["timestamp"])
-    df["city"] = CITY
-    df["country"] = COUNTRY
-    return df
-
 def enrich_features(df):
     df["timestamp"] = pd.to_datetime(df["timestamp"])
     df["hour"] = df["timestamp"].dt.hour.astype(float)
@@ -315,7 +285,6 @@ def train_models(df, target_param="pm25", selected_model="RandomForest"):
                 print(f"⚠️ SHAP failed for {name}: {e}")
 
 
-# Register metadata
         model_obj = mr.python.create_model(
             name=f"{name}_AQI_Model",
             description=f"{name} model for PM2.5 prediction",
@@ -323,7 +292,6 @@ def train_models(df, target_param="pm25", selected_model="RandomForest"):
             input_example=X_train.head(1)
         )
 
-        # Attach the actual model file
         model_obj.save(model_path)
     return results
 
