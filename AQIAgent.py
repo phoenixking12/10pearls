@@ -43,12 +43,15 @@ model_defs = {
     )
 }
 
-API_KEY = "vkQUwBffplAUhyYL.giHjnNqIRRF88JUfLtwjyskbXVuqhO3mHiocVBP5I9OOrEOxVSjLIDQBUw1qpo1Q"
-PROJECT_NAME = "AirAi"
+import os
+
+HOPSWORK_API_KEY = os.environ.get("HOPSWORK_API_KEY")
+OPENAQ_API_KEY = os.environ.get("OPENAQ_API_KEY")
 
 OPENAQ_HEADERS = {
-    "X-API-Key": "e323e4f35041ef19951799d962bdb5ccc6e878baead60ede3e7e56574ed1ae0f"
+    "X-API-Key": OPENAQ_API_KEY
 }
+PROJECT_NAME = "AirAi"
 
 LAT, LON = 24.8607, 67.0011
 CITY = "Karachi"
