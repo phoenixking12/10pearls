@@ -1,0 +1,20 @@
+# Core scientific stack
+numpy
+pandas
+scikit-learn
+xgboost
+
+# Model explainability
+shap
+matplotlib
+joblib
+
+# Hopsworks Feature Store SDK
+hopsworks
+hsfs
+
+# Optional: if you use plotting beyond matplotlib
+seaborn
+
+# If you’re using Jupyter locally
+jupyter
